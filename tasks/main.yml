@@ -1,0 +1,23 @@
+---
+- hosts: webservers
+  gather_facts: yes
+  remote_user: root
+  become: yes
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+  - name: Ensure group exist
+    group:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - ansible
+      - dgplug
+  - name: Add several users to several group
+    user: 
+      name: "{{ item.name }}"
+      groups: "{{ item.groups }}"
+      state: present
+    loop:
+      - { name: 'testuser1', groups: 'ansible' }
+      - { name: 'testuser2', groups: 'dgplug' }
