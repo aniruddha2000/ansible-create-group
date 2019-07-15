@@ -2,7 +2,7 @@
 - hosts: webservers
   gather_facts: yes
   remote_user: root
-  become: yes
+  become: true
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
